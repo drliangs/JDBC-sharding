@@ -26,7 +26,7 @@ public class ShardingTest {
 
     @Test
     void query() {
-        System.out.println("deviceMapper.selectList(new QueryWrapper<TbDevice>().eq(\"device_id\",1L)) = " + deviceMapper.selectList(new QueryWrapper<TbDevice>().eq("device_id", 1L)));
+        System.out.println("deviceMapper.selectList(new QueryWrapper<TbDevice>().eq(\"device_id\",1L)) = " + deviceMapper.selectList(new QueryWrapper<TbDevice>().eq("device_id", 2L)));
     }
 
     @Test
