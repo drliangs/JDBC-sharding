@@ -10,6 +10,7 @@ public class MyTableRangeAlgorithm implements RangeShardingAlgorithm<Long> {
     @Override
     public Collection<String> doSharding(Collection<String> availableTargetNames, RangeShardingValue<Long> shardingValue) {
         String logicTableName = shardingValue.getLogicTableName();
+        System.out.println(logicTableName + "zz");
         return Arrays.asList(logicTableName + "_0", logicTableName + "_1");
     }
 }
