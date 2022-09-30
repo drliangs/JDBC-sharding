@@ -8,8 +8,10 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.drlang.shadring.entity.TbDevice;
 import com.drlang.shadring.entity.TbDeviceInfo;
+import com.drlang.shadring.entity.TbDeviceType;
 import com.drlang.shadring.mapper.DeviceInfoMapper;
 import com.drlang.shadring.mapper.DeviceMapper;
+import com.drlang.shadring.mapper.DeviceTypeMapper;
 import lombok.var;
 import org.apache.shardingsphere.api.hint.HintManager;
 import org.apache.shardingsphere.core.yaml.config.sharding.YamlTableRuleConfiguration;
@@ -28,7 +30,7 @@ public class ShardingTest {
     @Autowired
     private DeviceInfoMapper infoMapper;
     @Autowired
-    private DeviceMapper deviceMapper;
+    private DeviceTypeMapper typeMapper;
     @Autowired
     private SpringBootShardingRuleConfigurationProperties properties;
 
@@ -98,7 +100,7 @@ public class ShardingTest {
             deviceMapper.insert(deviceInfo);
             TbDeviceInfo tbDeviceInfo = new TbDeviceInfo();
             tbDeviceInfo.setDeviceId((long) i);
-            tbDeviceInfo.setDeviceIntro(""+i);
+            tbDeviceInfo.setDeviceIntro("" + i);
             infoMapper.insert(tbDeviceInfo);
         }
     }
@@ -106,5 +108,16 @@ public class ShardingTest {
     @Test
     void join() {
         infoMapper.queryDeviceInfo().forEach(System.out::println);
+    }
+
+    @Test
+    void testInsertDeviceType() {
+        TbDeviceType tbDeviceType = new TbDeviceType();
+        tbDeviceType.setTypeId(1);
+        tbDeviceType.setTypeName("人脸考勤");
+
+
+        TbDeviceType tbDeviceType1 = new TbDeviceType();
+
     }
 }
