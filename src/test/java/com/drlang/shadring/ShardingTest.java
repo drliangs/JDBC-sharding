@@ -9,9 +9,11 @@ import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapp
 import com.drlang.shadring.entity.TbDevice;
 import com.drlang.shadring.entity.TbDeviceInfo;
 import com.drlang.shadring.entity.TbDeviceType;
+import com.drlang.shadring.entity.TbUser;
 import com.drlang.shadring.mapper.DeviceInfoMapper;
 import com.drlang.shadring.mapper.DeviceMapper;
 import com.drlang.shadring.mapper.DeviceTypeMapper;
+import com.drlang.shadring.mapper.UserMapper;
 import lombok.var;
 import org.apache.shardingsphere.api.hint.HintManager;
 import org.apache.shardingsphere.core.yaml.config.sharding.YamlTableRuleConfiguration;
@@ -115,9 +117,23 @@ public class ShardingTest {
         TbDeviceType tbDeviceType = new TbDeviceType();
         tbDeviceType.setTypeId(1);
         tbDeviceType.setTypeName("人脸考勤");
-
+        typeMapper.insert(tbDeviceType);
 
         TbDeviceType tbDeviceType1 = new TbDeviceType();
+        tbDeviceType1.setTypeId(2);
+        tbDeviceType1.setTypeName("人脸通道");
+        typeMapper.insert(tbDeviceType1);
+    }
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    void testInsertUser() {
+        for (int i = 0; i < 10; i++) {
+            TbUser tbUser = new TbUser();
+            tbUser.setName(""+i);
+            userMapper.insert(tbUser);
+        }
     }
 }
